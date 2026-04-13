@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_ls.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: chrstein <chrstein@student.42lyon.fr>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/04/10 23:48:32 by chrstein          #+#    #+#             */
+/*   Updated: 2026/04/10 23:48:34 by chrstein         ###   ########lyon.fr   */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef FT_LS_H
 # define FT_LS_H
 
@@ -8,37 +20,30 @@
 # include <errno.h>
 # include <stdbool.h>
 # include <sys/types.h>
+# include <sys/stat.h>
 # include <dirent.h>
 # include <unistd.h>
 
-# define MUST_EXIT 242
+# ifndef DEBUG
+#  define DEBUG 0
+# endif
 
-# define ERR_DENIED "%s: Permission denied\n"
-# define ERR_IS_FILE "%s: Is a directory\n"
-# define ERR_EXIT "exit: too many arguments\n"
-# define ERR_EXIT_N "exit: %s: numeric argument required\n"
-# define ERR_CD "cd: %s: No such file or directory\n"
-# define ERR_CD_TMA "cd: too many arguments\n"
+# define INVLD_OPTS "ft_ls: invalid option -- '%c'\n\
+Try to read the f... subject for more information.\n"
+# define CNTACSS "ft_ls: cannot access %s: %s\n"
 
 typedef struct s_data
 {
-	t_list	*cmd_param;
-	t_list	*cmds;
-	t_list	*var_no_value;
-	char	**env;
-	char	**path;
-	char	*pwd;
-	char	*line;
-	char	*no_space_line;
-	int		last_status;
-	pid_t	pid;
-	char	*tmp;
-	char	*to_free;
-	int		nb_line_hd;
-	size_t	nb_cmds;
-	size_t	i;
-	bool	cancel;
+	// bool isOptions;
+	int		nb_args;
+	bool	l;
+	bool	R;
+	bool	a;
+	bool	r;
+	bool	t;
+	t_list	*head;
 }					t_data;
 
+void init_options(t_data *data, char **argv);
 
 #endif

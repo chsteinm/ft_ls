@@ -1,26 +1,33 @@
 NAME = ft_ls
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -g3 #-fsanitize=address
+FLAGS = -Wall -Wextra -Werror -g3 #-fsanitize=address
 PATH_SRCS = ./srcs/
-SRCS =	main.c
+SRCS =	main.c options.c
 OBJ = $(addprefix $(BUILD_DIR)/,$(SRCS:.c=.o))
 BUILD_DIR = .build
 LIBFT = ./includes/libft/libft.a
+DEBUG = -D DEBUG=1
 
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	@$(CC) $(CFLAGS) $(OBJ) $(LIBFT) -o $@ -lreadline -lhistory
+	$(CC) $(FLAGS) $(OBJ) $(LIBFT) -o $@
 	@echo "\nft_ls is ready for use!\n"
 
 $(BUILD_DIR)/%.o: $(PATH_SRCS)%.c Makefile $(LIBFT)
 	@mkdir -p $(BUILD_DIR)
-	@$(CC) $(CFLAGS) -MMD -MP -c $< -o $@ -I ./includes
+	$(CC) $(FLAGS) -MMD -MP -c $< -o $@ -I ./includes
 
 -include $(OBJ:.o=.d) $(OBJ_BONUS:.o=.d)
 
 $(LIBFT): FORCE
-	@make --no-print-directory -C includes/libft bonus
+	make -C includes/libft bonus
+
+debug: FLAGS += $(DEBUG)
+debug: sclean all
+
+sclean: 
+	@rm -rf $(BUILD_DIR)
 
 clean:
 	@make --no-print-directory -C ./includes/libft clean
@@ -35,4 +42,4 @@ re: fclean
 
 FORCE:
 
-.PHONY: all clean fclean re bonus FORCE
+.PHONY: all clean fclean re bonus FORCE debug

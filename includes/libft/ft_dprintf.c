@@ -30,10 +30,10 @@ int	print_convert_fd(va_list args, const char *str, int fd)
 		return (print_p_fd(args, fd));
 	else if (*str == 'x')
 		return (ft_putnbr_base_fd(va_arg(args, unsigned int), \
-		BASE16LOW, 16, fd));
+BASE16LOW, 16, fd));
 	else if (*str == 'X')
 		return (ft_putnbr_base_fd(va_arg(args, unsigned int), \
-		BASE16UP, 16, fd));
+BASE16UP, 16, fd));
 	else
 		return (write(fd, str, 1));
 }

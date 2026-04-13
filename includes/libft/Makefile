@@ -76,7 +76,7 @@ BUILD_DIR = .build
 all: $(NAME)
 
 $(NAME): $(OBJ) Makefile
-	@ar rcs $@ $^
+	ar rcs $@ $^
 
 bonus: $(NAME) $(OBJ_BONUS)
 	@if [ "$$(find $(OBJ_BONUS) -newer "$(NAME)" -print -quit)" ]; then \
@@ -87,7 +87,7 @@ bonus: $(NAME) $(OBJ_BONUS)
 
 $(BUILD_DIR)/%.o: %.c Makefile
 	@mkdir -p $(BUILD_DIR)
-	@cc $(CFLAGS) -MMD -MP -c $< -o $@
+	cc $(CFLAGS) -MMD -MP -c $< -o $@
 
 -include $(OBJ:.o=.d) $(OBJ_BONUS:.o=.d)
 
