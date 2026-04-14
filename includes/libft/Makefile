@@ -59,7 +59,9 @@ SRCS = 	ft_atol.c \
 		ft_strtol.c \
 		ft_free_one_str_in_strs.c \
 		ft_join_3_strs.c \
-		ft_sort_params.c
+		ft_sort_params.c \
+		ft_snprintf.c \
+		ft_snprint_conversions.c
 OBJ = $(addprefix $(BUILD_DIR)/,$(SRCS:.c=.o))
 SRCS_BONUS =	ft_lstadd_back_bonus.c \
 				ft_lstadd_front_bonus.c \
@@ -100,4 +102,8 @@ fclean: clean
 re : fclean
 	@make
 
-.PHONY: all clean fclean re bonus
+test_snprintf: $(NAME) test_snprintf.c
+	cc $(CFLAGS) test_snprintf.c $(NAME) -o test_snprintf
+	./test_snprintf
+
+.PHONY: all clean fclean re bonus test_snprintf
