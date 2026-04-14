@@ -20,6 +20,7 @@
 # include <stdbool.h>
 # include <limits.h>
 # include <fcntl.h>
+# include <sys/stat.h>
 # include "get_next_line.h"
 
 # define SUCCESS 0
@@ -34,6 +35,8 @@ typedef struct s_list
 {
 	void			*content;
 	struct stat		sta;
+	struct s_list	*parent;
+	struct s_list	*child;
 	struct s_list	*next;
 	struct s_list	*prev;
 }	t_list;

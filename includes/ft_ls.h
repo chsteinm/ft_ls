@@ -30,7 +30,7 @@
 
 # define INVLD_OPTS "ft_ls: invalid option -- '%c'\n\
 Try to read the f... subject for more information.\n"
-# define CNTACSS "ft_ls: cannot access %s: %s\n"
+# define CNTACSS "ft_ls: cannot access '%s': %s\n"
 
 typedef struct s_data
 {
@@ -41,7 +41,7 @@ typedef struct s_data
 	bool	a;
 	bool	r;
 	bool	t;
-	t_list	*head;
+	t_list	*files;
 }					t_data;
 
 void init_options(t_data *data, char **argv);
